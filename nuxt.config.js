@@ -59,7 +59,6 @@ export default {
     { src: '@/plugins/font-awesome.js' },
     // ****** END:: IMPORTING FONT AWESOME FILE ****** //
 
-
     { src: '@/plugins/sweetalert.js' },
 
     { src: '@/plugins/slick-carousel.js', ssr: false },
@@ -96,20 +95,21 @@ export default {
     [
       'nuxt-i18n',
       {
-        locales: [{
-          name: 'عربي ',
-          code: 'ar',
-          iso: 'ar-AR',
-          file: 'ar-AR.js',
-          dir: 'rtl',
-        },
-        {
-          name: 'English',
-          code: 'en',
-          iso: 'en-US',
-          file: 'en-US.js',
-          dir: 'ltr',
-        },
+        locales: [
+          {
+            name: 'عربي ',
+            code: 'ar',
+            iso: 'ar-AR',
+            file: 'ar-AR.js',
+            dir: 'rtl',
+          },
+          {
+            name: 'English',
+            code: 'en',
+            iso: 'en-US',
+            file: 'en-US.js',
+            dir: 'ltr',
+          },
         ],
         lazy: true,
         langDir: 'locales/',
@@ -158,13 +158,16 @@ export default {
     mode: 'history',
     base: '/website/',
     extendRoutes(routes) {
-      routes.push({
-        path: '*',
-        redirect: '/',
-      }, {
-        path: '/en',
-        redirect: '/',
-      })
+      routes.push(
+        {
+          path: '*',
+          redirect: '/',
+        },
+        {
+          path: '/en',
+          redirect: '/',
+        }
+      )
     },
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -193,7 +196,7 @@ export default {
   },
 
   server: {
-    port: 5000,
+    port: 5011,
   },
   env: {
     baseUrl: process.env.baseUrl || '',
