@@ -159,3 +159,17 @@
   .slide_content_wrapper {
   background-color: transparent;
 }
+
+@media (min-width: 991px) {
+  #app.rtl .hero_section_wrapper .mobile_mockup_wrapper {
+    top: 120px;
+  }
+
+  .hero_section_wrapper
+    .slider_image_wrapper
+    .slide_content_wrapper
+    .container-xl
+    .slide_desc_content_wrapper {
+    margin-bottom: 0 !important;
+  }
+}
