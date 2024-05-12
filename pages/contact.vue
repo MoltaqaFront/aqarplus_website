@@ -20,21 +20,22 @@
                   <ValidationObserver v-slot="{ invalid }" ref='observer'>
                     <form action="" @submit.prevent="sendData">
 
-                      <ValidationProvider rules="required" :name="$t('contact.name')" v-slot="{ errors }">
+                      <ValidationProvider rules="" :name="$t('contact.name')" v-slot="{ errors }">
                         <div class="form-group">
                           <input type="text" v-model="form.name" :placeholder="$t('contact.name')" />
                           <span class="validation_message">{{ errors[0] }}</span>
                         </div>
 
                       </ValidationProvider>
-                      <!-- <ValidationProvider rules="required|email" :name="$t('contact.email')" v-slot="{ errors }">
+
+                      <ValidationProvider rules="" :name="$t('contact.email')" v-slot="{ errors }">
                         <div class="form-group">
                           <input type="email" v-model="form.email" :placeholder="$t('contact.email')" />
                           <span class="validation_message">{{ errors[0] }}</span>
                         </div>
-                      </ValidationProvider> -->
+                      </ValidationProvider>
 
-                      <ValidationProvider rules="required" :name="$t('contact.phone')" v-slot="{ errors }">
+                      <ValidationProvider rules="" :name="$t('contact.phone')" v-slot="{ errors }">
                         <div class="form-group">
                           <input type="text" v-model="form.phone" :placeholder="$t('contact.phone')" />
                           <span class="validation_message">{{ errors[0] }}</span>
@@ -42,7 +43,7 @@
 
                       </ValidationProvider>
 
-                      <ValidationProvider rules="required" :name="$t('contact.message')" v-slot="{ errors }">
+                      <ValidationProvider rules="" :name="$t('contact.message')" v-slot="{ errors }">
                         <div class="form-group">
                           <textarea v-model="form.message" :placeholder="$t('contact.message')"></textarea>
                           <span class="validation_message">{{ errors[0] }}</span>
@@ -77,7 +78,7 @@
 <script>
 
 import { ValidationProvider, ValidationObserver } from "vee-validate";
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 export default {
 
@@ -91,7 +92,7 @@ export default {
   components: {
     ValidationProvider,
     ValidationObserver,
-    Swal
+    // Swal
   },
 
 
@@ -103,7 +104,7 @@ export default {
         email: "",
         phone: "",
         message: "",
-        type: "contact"
+        message_type: "Suggestion"
       },
 
 
@@ -137,11 +138,10 @@ export default {
     async sendData() {
 
       try {
-        await this.$axios.$post('api/contact_us', this.form).then(response => {
+        await this.$axios.$post('contactUs/create', this.form).then(response => {
           this.form.name = '';
           this.form.email = '';
           this.form.phone = '';
-          this.form.message_title = '';
           this.form.message = '';
 
           this.$refs.observer.reset();
@@ -166,7 +166,7 @@ export default {
             type: 'error',
             text: `${error.response.data.message}`,
             showConfirmButton: false,
-            timer: 3000
+            timer: 1000
           })
 
           console.log(error)
@@ -183,6 +183,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.contact {
+  margin-top: 180px;
+}
+
 .validation_message {
   font-size: 13px;
   color: red;

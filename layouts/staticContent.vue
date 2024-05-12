@@ -65,7 +65,7 @@ export default {
   }
 }
 .header_content_wrapper {
-    position: sticky;
+    // position: sticky; 
     background: #505050;
 }
 .header_content_wrapper .nuxt-link-active {

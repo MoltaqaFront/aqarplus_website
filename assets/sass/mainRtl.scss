@@ -15,6 +15,7 @@
 #app.rtl {
   font-family: $light_font;
   direction: rtl;
+
   .hero_section_wrapper {
     .section_shape {
       img {
@@ -53,6 +54,12 @@
   .register_forms .wizard_tabs_wrapper .wizard_tab:last-child {
     left: inherit;
     right: calc(100% - 50px);
+  }
+}
+
+#app.ltr {
+  .hero_section_wrapper .slider_image_wrapper {
+    min-height: 800px;
   }
 }
 

@@ -4,7 +4,8 @@
   overflow: hidden;
   .slider_image_wrapper {
     position: relative;
-    height: 100vh;
+    // height: 100vh;
+    min-height: 800px;
     width: 100%;
     .slider_image {
       width: 100%;
@@ -80,6 +81,10 @@
 }
 
 @media (max-width: 850px) {
+  #app.ltr .hero_section_wrapper .slider_image_wrapper {
+    min-height: unset !important;
+  }
+
   .hero_section_wrapper {
     .slider_image_wrapper {
       height: 350px;
@@ -171,5 +176,14 @@
     .container-xl
     .slide_desc_content_wrapper {
     margin-bottom: 0 !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .hero_section_wrapper .slider_image_wrapper {
+    min-height: 600px;
+    .slide_content_wrapper .container-xl .slide_desc_content_wrapper {
+      width: 100%;
+    }
   }
 }

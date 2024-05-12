@@ -59,7 +59,7 @@ export default {
     { src: '@/plugins/font-awesome.js' },
     // ****** END:: IMPORTING FONT AWESOME FILE ****** //
 
-    { src: '@/plugins/sweetalert.js' },
+    // { src: '@/plugins/sweetalert.js' },
 
     { src: '@/plugins/slick-carousel.js', ssr: false },
 
@@ -90,6 +90,12 @@ export default {
     '@nuxtjs/pwa',
 
     // '@nuxt/image',
+    [
+      'nuxt-sweetalert2',
+      {
+        // confirmButtonColor: '#FFFFFF'
+      },
+    ],
 
     // ===== END:: PROJECT MODULES
     [
@@ -138,7 +144,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'https://aqar-plus.com/',
+    baseURL: 'https://backend.aqar-plus.com/client-api/v1/',
 
     headers: {
       common: {
@@ -156,7 +162,7 @@ export default {
   // },
   router: {
     mode: 'history',
-    base: '/website/',
+    base: '/',
     extendRoutes(routes) {
       routes.push(
         {

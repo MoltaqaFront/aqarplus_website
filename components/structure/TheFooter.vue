@@ -38,20 +38,32 @@
         <!-- Start:: Contact Info Wrapper -->
         <div class="col-lg-6 col-xl-5 d-flex justify-content-between flex-column flex-lg-row my-3">
           <ul class="contact_info_list">
-            <!-- <li class="contact_info_item">
+            <li class="contact_info_item">
               <span class="icon">
                 <i class="fa-regular fa-envelope"></i>
               </span>
 
-              <a href="mailto:info@lamsamotqana.app"><span class="value"> info@lamsamotqana.app </span></a>
-            </li> -->
+              <a :href="'mailto:' + organization_email"><span class="value"> {{ organization_email }} </span></a>
+            </li>
 
             <li class="contact_info_item">
               <span class="icon">
                 <i class="fa-solid fa-fax"></i>
               </span>
 
-              <a href="tel:0566989608"><span class="value"> 0566989608</span></a>
+              <div>
+                <span class="value" v-for="(item, index) in phones" :key="'f' + index">
+                  {{ item }}
+                </span>
+              </div>
+            </li>
+
+            <li class="contact_info_item">
+              <span class="icon">
+                <i class="fab fa-whatsapp"></i>
+              </span>
+
+              <a :href="'https://wa.me/+' + watsApp" target="_blank"><span class="value">{{ watsApp }}</span></a>
             </li>
 
             <li class="contact_info_item">
@@ -59,8 +71,10 @@
                 <i class="fa-solid fa-location-dot"></i>
               </span>
 
-              <a href="https://goo.gl/maps/pyKsGuyD9gRBR2UC7" target="_blank"> <span class="value"> {{ $t('address') }} </span> </a>
+              <a href="https://goo.gl/maps/pyKsGuyD9gRBR2UC7" target="_blank"> <span class="value"> {{ address }}
+                </span> </a>
             </li>
+
           </ul>
 
           <!-- <ul class="social_links_list">
@@ -97,6 +111,15 @@
 export default {
   name: "TheFooter",
 
+  data() {
+    return {
+      watsApp: "",
+      address: "",
+      organization_email: "",
+      phones: []
+    }
+  },
+
   methods: {
     // START:: SCROLL TO SECTION
     scrollToSection(section_id) {
@@ -108,6 +131,26 @@ export default {
       }
     },
     // END:: SCROLL TO SECTION
+    async getData() {
+      try {
+        return await this.$axios.get(`settings?key=dashboard_contact_with_management`).then(response => {
+          this.phones = response.data.data[0].value.phones;
+          this.watsApp = response.data.data[0].value.watsApp;
+          this.address = response.data.data[0].value.address;
+          this.organization_email = response.data.data[0].value.organization_email;
+
+        }).catch(error => {
+          console.log(error)
+        })
+      } catch (error) {
+        console.log("catch : " + error)
+      }
+    }
   },
+
+  mounted() {
+    this.getData();
+  }
+
 }
 </script>
