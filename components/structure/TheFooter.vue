@@ -38,7 +38,7 @@
         <!-- Start:: Contact Info Wrapper -->
         <div class="col-lg-6 col-xl-5 d-flex justify-content-between flex-column flex-lg-row my-3">
           <ul class="contact_info_list">
-            <li class="contact_info_item">
+            <li class="contact_info_item" v-if="organization_email">
               <span class="icon">
                 <i class="fa-regular fa-envelope"></i>
               </span>
@@ -46,7 +46,7 @@
               <a :href="'mailto:' + organization_email"><span class="value"> {{ organization_email }} </span></a>
             </li>
 
-            <li class="contact_info_item">
+            <li class="contact_info_item" v-if="phones.length">
               <span class="icon">
                 <i class="fa-solid fa-fax"></i>
               </span>
@@ -58,7 +58,7 @@
               </div>
             </li>
 
-            <li class="contact_info_item">
+            <li class="contact_info_item" v-if="watsApp">
               <span class="icon">
                 <i class="fab fa-whatsapp"></i>
               </span>
@@ -66,7 +66,7 @@
               <a :href="'https://wa.me/+' + watsApp" target="_blank"><span class="value">{{ watsApp }}</span></a>
             </li>
 
-            <li class="contact_info_item">
+            <li class="contact_info_item" v-if="address">
               <span class="icon">
                 <i class="fa-solid fa-location-dot"></i>
               </span>
@@ -134,7 +134,7 @@ export default {
     async getData() {
       try {
         return await this.$axios.get(`settings?key=dashboard_contact_with_management`).then(response => {
-          this.phones = response.data.data[0].value.phones;
+          this.phones = response.data.data[0].value.phones ? response.data.data[0].value.phones : [];
           this.watsApp = response.data.data[0].value.watsApp;
           this.address = response.data.data[0].value.address;
           this.organization_email = response.data.data[0].value.organization_email;
