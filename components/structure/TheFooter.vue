@@ -28,8 +28,15 @@
             <li class="footer_route">
               <button @click="scrollToSection('download_app_section')"> {{ $t("nav.download") }} </button>
             </li>
+
+              <li class="footer_route">
+                <button @click="navigateTo(localePath('/terms'))"> {{ $t("nav.terms") }} </button>
+              </li>
+              <li class="footer_route">
+                <button @click="navigateTo(localePath('/policy'))"> {{ $t("nav.policy") }} </button>
+              </li>
             <li class="footer_route">
-              <button @click="scrollToSection('contact_us_section')"> {{ $t("nav.contact") }} </button>
+              <button @click="navigateTo(localePath('/contact'))"> {{ $t("nav.contact") }} </button>
             </li>
           </ul>
         </div>
@@ -130,6 +137,11 @@ export default {
         selected_section.scrollIntoView();
       }
     },
+    navigateTo(path) {
+    if (this.$route.path !== path) {
+      this.$router.push(path);
+    }
+  },
     // END:: SCROLL TO SECTION
     async getData() {
       try {
